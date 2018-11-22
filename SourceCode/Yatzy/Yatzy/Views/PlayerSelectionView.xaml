@@ -1,0 +1,32 @@
+﻿<Window x:Class="Yatzy.Views.PlayerSelectionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Yatzy.Views"
+        mc:Ignorable="d"
+        Title="Yatzy" Height="200" Width="275"
+        DataContext="{Binding PlayerSelection, Source={StaticResource Locator}}">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" FontSize="14">
+            <TextBlock>Please enter the names of the players<LineBreak/>and click 'start' to begin the game.</TextBlock>
+        </Label>
+        <Label Content="Player 1" Grid.Column="0" Grid.Row="1"/>
+        <Label Content="Player 2" Grid.Column="0" Grid.Row="2"/>
+        <TextBox Grid.Column="1" Margin="2" Text="{Binding Player1}" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Column="1" Margin="2" Text="{Binding Player2}" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Button Content="Cancel" Grid.Column="1" Command="{Binding CancelCommand}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+        <Button Content="Start" Grid.Column="2" Command="{Binding StartCommand}" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+    </Grid>
+</Window>
