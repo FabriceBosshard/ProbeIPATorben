@@ -1,0 +1,278 @@
+<Project>
+  <Name>Unbenannt</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Yatzy</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>RightColumnViewModel</Name>
+        <Access>Public</Access>
+        <Location left="307" top="95" />
+        <Size width="207" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">string Description</Member>
+        <Member type="Field">string PlayerOneField</Member>
+        <Member type="Field">string PlayerTwoField</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DependencyLocator</Name>
+        <Access>Public</Access>
+        <Location left="611" top="486" />
+        <Size width="210" height="123" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void InitializeComponents()</Member>
+        <Member type="Method">public void SetPlayers()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>YatzyViewModel</Name>
+        <Access>Public</Access>
+        <Location left="828" top="46" />
+        <Size width="162" height="281" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int LeftSubScoreOne</Member>
+        <Member type="Field">int RightSubScoreOne</Member>
+        <Member type="Field">int LeftSubScoreTwo</Member>
+        <Member type="Field">int RightSubScoreTwo</Member>
+        <Member type="Field">int TotalScoreOne</Member>
+        <Member type="Field">int TotalScoreTwo</Member>
+        <Member type="Field">int RollCount</Member>
+        <Member type="Method">public void Roll()</Member>
+        <Member type="Method">public void Play()</Member>
+        <Member type="Method">public void SetKombination()</Member>
+        <Member type="Method">public void EndTurn()</Member>
+        <Member type="Method">public void CalculatePoints()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DatabaseClient</Name>
+        <Access>Public</Access>
+        <Location left="344" top="289" />
+        <Size width="176" height="105" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void GetHighscores()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PlayerChooserViewModel</Name>
+        <Access>Public</Access>
+        <Location left="592" top="328" />
+        <Size width="225" height="130" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void Start()</Member>
+        <Member type="Method">public void ValidatePlayers()</Member>
+        <Member type="Method">public void Cancel()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Highscore</Name>
+        <Access>Public</Access>
+        <Location left="163" top="316" />
+        <Size width="162" height="122" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int Points</Member>
+        <Member type="Field">int name</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>HighscoreViewModel</Name>
+        <Access>Public</Access>
+        <Location left="355" top="486" />
+        <Size width="232" height="101" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void GetHighScores()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IDatabaseClient</Name>
+        <Access>Public</Access>
+        <Location left="552" top="203" />
+        <Size width="188" height="95" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">void GetHighscores()</Member>
+        <Member type="Method">void SetHighscore()</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>ISession</Name>
+        <Access>Public</Access>
+        <Location left="867" top="393" />
+        <Size width="162" height="83" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">int Players { get; set; }</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>MainViewModel</Name>
+        <Access>Public</Access>
+        <Location left="148" top="451" />
+        <Size width="193" height="130" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void Play()</Member>
+        <Member type="Method">public void Quit()</Member>
+        <Member type="Method">public void OpenHighscore()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Session</Name>
+        <Access>Public</Access>
+        <Location left="867" top="512" />
+        <Size width="162" height="125" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Player Players</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>LeftColumnViewModel</Name>
+        <Access>Public</Access>
+        <Location left="1055" top="172" />
+        <Size width="212" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">string Description</Member>
+        <Member type="Field">bitmap Image</Member>
+        <Member type="Field">string PlayerOneField</Member>
+        <Member type="Field">string PlayerTwoField</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Player</Name>
+        <Access>Public</Access>
+        <Location left="1055" top="352" />
+        <Size width="162" height="134" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">bool IsActive</Member>
+        <Member type="Field">string Name</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Realization" first="10" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>960</X>
+          <Y>487</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="3" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>418</X>
+          <Y>254</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>505</X>
+          <Y>254</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="4" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>711</X>
+          <Y>461</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="6" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>564</X>
+          <Y>329</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>910</X>
+          <Y>359</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>888</X>
+          <Y>363</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="1" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>847</X>
+          <Y>529</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="6" second="5">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>379</X>
+          <Y>461</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>352</X>
+          <Y>429</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="11">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>803</X>
+          <Y>244</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="10" second="12">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1096</X>
+          <Y>516</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
