@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Yatzy" Height="350" Width="300"
-        DataContext="{Binding Highscore, Source={StaticResource Locator}}">
+        DataContext="{Binding HighScore, Source={StaticResource Locator}}">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="110" />
@@ -22,9 +22,9 @@
              Height="40" />
       <Image Source="../_Assets/dice-6-md.png" HorizontalAlignment="Center" Margin="0,40,200,0" VerticalAlignment="Top"
              Height="40" />
-      <Label Content="Highscore" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+      <Label Content="HighScore" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
     </Grid>
-    <ListView Grid.Row="1" ItemsSource="{Binding HighscoreList}">
+    <ListView Grid.Row="1" ItemsSource="{Binding HighScoreList}">
       <ListView.ItemTemplate>
         <DataTemplate>
           <Grid>

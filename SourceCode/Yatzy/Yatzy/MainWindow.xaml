@@ -22,7 +22,7 @@
             <Label Content="Yatzy" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </Grid>
         <Button Content="Play" Grid.Row="1" Width="75" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding PlayCommand}"/>
-        <Button Content="Highscore" Grid.Row="2" Width="75" HorizontalAlignment="Center" VerticalAlignment="Center"  Command="{Binding HighScoreCommand}"/>
+        <Button Content="HighScore" Grid.Row="2" Width="75" HorizontalAlignment="Center" VerticalAlignment="Center"  Command="{Binding HighScoreCommand}"/>
         <Button Content="Quit" Grid.Row="3" Width="75" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding QuitCommand}"/>
     </Grid>
 </Window>

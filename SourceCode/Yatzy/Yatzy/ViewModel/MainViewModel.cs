@@ -19,6 +19,7 @@ namespace Yatzy.ViewModel
     private static void Play()
     {
       new PlayerSelectionView().Show();
+      CloseMain();
     }
 
     private static void OpenHighScore()

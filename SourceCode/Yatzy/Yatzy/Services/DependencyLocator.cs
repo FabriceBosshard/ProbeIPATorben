@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Unity;
+using Yatzy.Model;
 using Yatzy.ViewModel;
 
 namespace Yatzy.Services
@@ -19,10 +20,14 @@ namespace Yatzy.Services
 
       Container.RegisterType<IDatabaseService, DatabaseService>(new ContainerControlledLifetimeManager());
     }
-    public void InitPlayers()
+    public void InitPlayers(string player1, string player2)
     {
-      //var session = new Session();
-      //Container.RegisterInstance<IAppSession>(session);
+      var session = new Session()
+      {
+        Player1 = new PlayerViewModel(player1),
+        Player2 = new PlayerViewModel(player2)
+      };
+      Container.RegisterInstance<ISession>(session);
     }
 
     internal static DependencyLocator Instance =>
@@ -30,7 +35,7 @@ namespace Yatzy.Services
 
     public MainViewModel Main => Container.Resolve<MainViewModel>();
     public PlayerSelectionViewModel PlayerSelection => Container.Resolve<PlayerSelectionViewModel>();
-    public HighscoreViewModel Highscore => Container.Resolve<HighscoreViewModel>();
+    public HighscoreViewModel HighScore => Container.Resolve<HighscoreViewModel>();
     public YatzyViewModel Yatzy => Container.Resolve<YatzyViewModel>();
   }
 }
