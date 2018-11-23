@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using ObjectBuilder2;
 using Yatzy.Helper;
 using Yatzy.Services;
-using Yatzy.Views;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
@@ -33,6 +29,13 @@ namespace Yatzy.ViewModel
       RollCommand = new RelayCommand(Roll);
       PlayCommand = new RelayCommand(Play);
       SetIsSelected= new RelayCommand(SetSelected);
+      MessengerInstance.Register<string>(this,CheckPreviewItems);
+    }
+
+    private void CheckPreviewItems(string s)
+    {
+      RightColumnList.Where(r=>r.Description!=s).ForEach(x=>x.IsInPreview=false);
+      LeftColumnList.Where(l => l.Description != s).ForEach(x => x.IsInPreview = false);
     }
 
     private void SetSelected()
@@ -106,6 +109,7 @@ namespace Yatzy.ViewModel
       }
 
       DiceList.Clear();
+      SelectActivePlayer();
     }
 
     private void Roll()
@@ -137,11 +141,9 @@ namespace Yatzy.ViewModel
         var rnd = new Random();
         for (var i = 0; i < DiceList.Count; i++)
         {
-          if (!DiceList[i].IsSelected)
-          {
-            var a = rnd.Next(1, 6);
-            DiceList[i] = new DiceViewModel(AvailableDiceList.First(d => d.Eyes == a));
-          }
+          if (DiceList[i].IsSelected) continue;
+          var a = rnd.Next(1, 6);
+          DiceList[i] = new DiceViewModel(AvailableDiceList.First(d => d.Eyes == a));
         }
       }
     }
@@ -158,17 +160,59 @@ namespace Yatzy.ViewModel
 
     private void Play()
     {
-      if (IsPlayAllowed())
+      if (IsPlayAllowed() && ActivePlayer.RollCount<3 && DiceList.Count(d => d.IsSelected)>0)
       {
         if (AllFieldPlayed())
         {
           FinishGame();
         }
+        EndTurn();
       }
+      else
+      {
+        MessageBox.Show("Please Select your PointSet first", "Invalid turn end", MessageBoxButton.OK);
+      }
+    }
+
+    private void EndTurn()
+    {
       UpdateScores();
+      CheckPlayedFields();
       ActivePlayer = ActivePlayer == Player1 ? Player2 : Player1;
       Player1.IsActive = !Player1.IsActive;
       Player2.IsActive = !Player2.IsActive;
+      DiceList = _emptyDiceList;
+      IsRollEnabled = true;
+      ActivePlayer.RollCount = 3;
+    }
+
+    private void CheckPlayedFields()
+    {
+      var left = LeftColumnList.SingleOrDefault(l => l.IsInPreview);
+      var right = RightColumnList.SingleOrDefault(r => r.IsInPreview);
+
+      if (left!= null)
+      {
+        if (ActivePlayer==Player1)
+        {
+          left.IsPlayed = false;
+        }
+        else
+        {
+          left.IsPlayedPlayerTwo = false;
+        }
+      }
+      else if(right!=null)
+      {
+        if (ActivePlayer == Player1)
+        {
+          right.IsPlayed = false;
+        }
+        else
+        {
+          right.IsPlayedPlayerTwo = false;
+        }
+      }
     }
 
     public void UpdateScores()
@@ -210,13 +254,13 @@ namespace Yatzy.ViewModel
 
     private bool IsPlayAllowed()
     {
-      return true;
+      return RightColumnList.Any(x => x.IsInPreview) || LeftColumnList.Any(x => x.IsInPreview);
     }
 
     private bool AllFieldPlayed()
     {
-      return RightColumnList.All(p => p.IsPlayed && p.IsPlayedPlayerTwo) &&
-             LeftColumnList.All(a => a.IsPlayed &&  a.IsPlayedPlayerTwo);
+      return RightColumnList.All(p => p.IsPlayed && !p.IsPlayedPlayerTwo) &&
+             LeftColumnList.All(a => a.IsPlayed &&  !a.IsPlayedPlayerTwo);
     }
 
     private void GameStart(ISession session)
@@ -237,7 +281,7 @@ namespace Yatzy.ViewModel
     private void InitDices()
     {
       AvailableDiceList = BoardCreator.InitDices();
-      DiceList = new ObservableCollection<DiceViewModel>()
+      _emptyDiceList = new ObservableCollection<DiceViewModel>()
       {
         new DiceViewModel(),
         new DiceViewModel(),
@@ -245,7 +289,10 @@ namespace Yatzy.ViewModel
         new DiceViewModel(),
         new DiceViewModel(),
       };
+      DiceList = _emptyDiceList;
     }
+
+    private ObservableCollection<DiceViewModel> _emptyDiceList;
 
     public ObservableCollection<DiceViewModel> AvailableDiceList { get; set; }
 
