@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Yatzy.Views.YatzyView" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\YatzyView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Yatzy.ViewModel.YatzyViewModel" Collapsed="true">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQCAwiAAQAAAEEAgAAgAgIAUAAEAACE=</HashCode>
+      <FileName>ViewModel\YatzyViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Yatzy.Views.HighscoreView" Collapsed="true">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\HighscoreView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Yatzy.ViewModel.HighscoreViewModel" Collapsed="true">
+    <Position X="2" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAEAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\HighscoreViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Yatzy.Services.DependencyLocator">
+    <Position X="3.25" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAUAAAAAAAAAAAAgAAAAAAAAAAAAQAAABAACAAA=</HashCode>
+      <FileName>Services\DependencyLocator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

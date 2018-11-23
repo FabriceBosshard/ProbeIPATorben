@@ -18,7 +18,16 @@ namespace Yatzy.ViewModel
     public HighscoreViewModel(IDatabaseService databaseService)
     {
       HighScoreList = databaseService.GetHighScores();
+      AppendPositioning();
       BackCommand = new RelayCommand(Back);
+    }
+
+    private void AppendPositioning()
+    {
+      for (var i = 0; i < HighScoreList.Count; i++)
+      {
+        HighScoreList[i].Position = i+1;
+      }
     }
 
     private void Back()

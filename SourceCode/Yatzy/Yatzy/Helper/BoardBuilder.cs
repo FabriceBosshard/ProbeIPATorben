@@ -71,8 +71,8 @@ namespace Yatzy.Helper
           SubDescription = "Total of All Dice",
           RuleSetFunction = (s) =>
           {
-            var isfour = s.GroupBy(x => x.Eyes).Any(y => y.Count() >= 4);
-            return isfour ? s.Select(e => e.Eyes).Sum() : 0;
+            var isFour = s.GroupBy(x => x.Eyes).Any(y => y.Count() >= 4);
+            return isFour ? s.Select(e => e.Eyes).Sum() : 0;
           }
         },
         new RightColumnViewModel()
@@ -93,10 +93,11 @@ namespace Yatzy.Helper
           RuleSetFunction = (s) =>
           {
             var continueValue = 1;
+            var ordered = s.OrderBy(d => d.Eyes).ToList();
 
-            for (var i = 1; i < s.Count; i++)
+            for (var i = 1; i < ordered.Count; i++)
             {
-              if (s[i].Eyes - s[i-1].Eyes == 1)
+              if (ordered[i].Eyes - ordered[i-1].Eyes == 1)
               {
                 continueValue++;
               }
@@ -116,10 +117,10 @@ namespace Yatzy.Helper
           RuleSetFunction = (s) =>
           {
             var continueValue = 1;
-
-            for (var i = 1; i < s.Count; i++)
+            var ordered = s.OrderBy(d => d.Eyes).ToList();
+            for (var i = 1; i < ordered.Count; i++)
             {
-              if (s[i].Eyes - s[i-1].Eyes == 1)
+              if (ordered[i].Eyes - ordered[i-1].Eyes == 1)
               {
                 continueValue++;
               }
@@ -129,7 +130,7 @@ namespace Yatzy.Helper
               }
             }
 
-            return continueValue  == 5 ? 30 : 0;
+            return continueValue  == 5 ? 40 : 0;
           }
         },
         new RightColumnViewModel()

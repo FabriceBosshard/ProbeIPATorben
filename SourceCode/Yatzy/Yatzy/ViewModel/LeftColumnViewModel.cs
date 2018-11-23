@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight;
@@ -12,19 +13,22 @@ namespace Yatzy.ViewModel
   {
     private int _player1Score;
     private int _player2Score;
-    private bool _isPlayed;
-    private bool _isPlayedPlayerTwo;
+    private bool _isNotPlayed;
+    private bool _isNotPlayedPlayerTwo;
+    private bool _isInPreview;
 
     public LeftColumnViewModel()
     {
       ShowScorePlayerOneCommand = new RelayCommand(ShowScorePlayerOne);
       ShowScorePlayerTwoCommand = new RelayCommand(ShowScorePlayerTwo);
+      IsNotPlayedPlayerTwo = true;
+      IsNotPlayed = true;
     }
 
     private void ShowScorePlayerOne()
     {
       Player1Score = CalculatePoints();
-      IsPlayed = true;
+      NotifyAll();
     }
 
     public ICommand ShowScorePlayerTwoCommand { get; set; }
@@ -32,19 +36,22 @@ namespace Yatzy.ViewModel
 
     private int CalculatePoints()
     {
-      if (SelectedDices!=null)
-      {
-        var validDices = SelectedDices.Where(d => d.Eyes == AllowedNumber);
-        return validDices.Select(d => d.Eyes).Sum();
-      }
+      if (SelectedDices == null) return 0;
+      var validDices = SelectedDices.Where(d => d.Eyes == AllowedNumber);
+      return validDices.Select(d => d.Eyes).Sum();
 
-      return 0;
+    }
+
+    private void NotifyAll()
+    {     
+      MessengerInstance.Send(Description);
+      IsInPreview = true;
     }
 
     private void ShowScorePlayerTwo()
     {
       Player2Score = CalculatePoints();
-      IsPlayedPlayerTwo = true;
+      NotifyAll();
     }
 
     public int AllowedNumber { get; set; }
@@ -72,26 +79,48 @@ namespace Yatzy.ViewModel
 
     public string Image { get; set; }
 
-    public bool IsPlayed
+    public bool IsNotPlayed
     {
-      get => _isPlayed;
+      get => _isNotPlayed;
       set
       {
-        _isPlayed = value;
+        _isNotPlayed = value;
         RaisePropertyChanged();
       }
     }
 
-    public bool IsPlayedPlayerTwo
+    public bool IsNotPlayedPlayerTwo
     {
-      get => _isPlayedPlayerTwo;
+      get => _isNotPlayedPlayerTwo;
       set
       {
-        _isPlayedPlayerTwo = value;
+        _isNotPlayedPlayerTwo = value;
         RaisePropertyChanged();
       }
     }
 
     public List<DiceViewModel> SelectedDices { get; set; }
+
+    public bool IsInPreview
+    {
+      get => _isInPreview;
+      set
+      {
+        _isInPreview = value;
+        RaisePropertyChanged();
+        if (!IsInPreview)
+        {
+          if (IsNotPlayed)
+          {
+            Player1Score = 0;
+          }
+
+          if (IsNotPlayedPlayerTwo)
+          {
+            Player2Score = 0;
+          }
+        }
+      }
+    }
   }
 }

@@ -12,26 +12,35 @@ namespace Yatzy.ViewModel
     {
       ShowScorePlayerOneCommand = new RelayCommand(ShowScorePlayerOne);
       ShowScorePlayerTwoCommand = new RelayCommand(ShowScorePlayerTwo);
+      IsNotPlayedPlayerTwo = true;
+      IsNotPlayed = true;
     }
 
     private void ShowScorePlayerTwo()
     {
       if (SelectedDices == null) return;
       Player2Score = RuleSetFunction(SelectedDices);
-      IsPlayedPlayerTwo = true;
+      NotifyAll();
+    }
+
+    private void NotifyAll()
+    {
+      MessengerInstance.Send(Description);
+      IsInPreview = true;
     }
 
     private void ShowScorePlayerOne()
     {
       if (SelectedDices == null) return;
       Player1Score = RuleSetFunction(SelectedDices);
-      IsPlayed = true;
+      NotifyAll();
     }
 
     private int _player1Score;
     private int _player2Score;
-    private bool _isPlayed;
-    private bool _isPlayedPlayerTwo;
+    private bool _isNotPlayed;
+    private bool _isNotPlayedPlayerTwo;
+    private bool _isInPreview;
     public Func<List<DiceViewModel>, int> RuleSetFunction { get; set; }
     public string Description { get; set; }
     public string SubDescription { get; set; }
@@ -55,23 +64,22 @@ namespace Yatzy.ViewModel
         RaisePropertyChanged();
       }
     }
-
-    public bool IsPlayed
+    public bool IsNotPlayed
     {
-      get => _isPlayed;
+      get => _isNotPlayed;
       set
       {
-        _isPlayed = value;
+        _isNotPlayed = value;
         RaisePropertyChanged();
       }
     }
 
-    public bool IsPlayedPlayerTwo
+    public bool IsNotPlayedPlayerTwo
     {
-      get => _isPlayedPlayerTwo;
+      get => _isNotPlayedPlayerTwo;
       set
       {
-        _isPlayedPlayerTwo = value;
+        _isNotPlayedPlayerTwo = value;
         RaisePropertyChanged();
       }
     }
@@ -80,5 +88,27 @@ namespace Yatzy.ViewModel
     public ICommand ShowScorePlayerOneCommand { get; set; }
 
     public List<DiceViewModel> SelectedDices { get; set; }
+
+    public bool IsInPreview
+    {
+      get => _isInPreview;
+      set
+      {
+        _isInPreview = value;
+        RaisePropertyChanged();
+        if (!IsInPreview)
+        {
+          if (IsNotPlayed)
+          {
+            Player1Score = 0;
+          }
+
+          if (IsNotPlayedPlayerTwo)
+          {
+            Player2Score = 0;
+          }
+        }
+      }
+    }
   }
 }
